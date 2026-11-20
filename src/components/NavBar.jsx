@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 import { routes } from "../config/routes";
 
@@ -8,11 +8,19 @@ import {
   IoIosSearch,
   IoIosNotificationsOutline,
   IoMdBookmark,
+  IoMdReorder,
 } from "react-icons/io";
 
 const NavBar = () => {
   const location = useLocation();
+
+  const [show, setShow] = useState(false);
+
   const isActive = (path) => path === location.pathname;
+
+  const toggleShow = () => {
+     setShow(prev => !prev);
+  }
 
   return (
     <header className="fixed top-0 left-0 w-full z-50 bg-surface-container-lowest/80 backdrop-blur-md border-b border-outline-variant/30 shadow-[0_4px_24px_rgba(0,0,0,0.5)]">
@@ -24,7 +32,7 @@ const NavBar = () => {
             </span>
           </div>
           <nav
-            className="hidden xl:flex items-center gap-space-xs"
+            className="hidden lg:flex items-center gap-space-xs"
             data-active-classes="bg-primary-container/15 text-primary border border-primary/30 shadow-[0_0_16px_rgba(56,189,248,0.2)] rounded-lg"
           >
             {routes.map((route) => (
@@ -39,21 +47,11 @@ const NavBar = () => {
             ))}
           </nav>
         </div>
-        <div className="flex-1 max-w-md hidden md:block">
-          <div className="relative flex items-center w-full">
-            <IoIosSearch className="material-symbols-outlined absolute left-space-md text-on-surface-variant pointer-events-none text-[20px]" />
 
-            <input
-              className="w-full bg-surface-container-high/60 backdrop-blur-md text-on-surface placeholder:text-outline font-body-sm text-body-sm pl-11 pr-14 py-space-sm rounded-xl border border-outline-variant/40 focus:outline-none focus:border-primary-container focus:ring-1 focus:ring-primary-container focus:shadow-[0_0_20px_rgba(56,189,248,0.25)] transition-all"
-              placeholder="Search movies, directors, genres..."
-              type="text"
-            />
-          </div>
-        </div>
-        <div className="flex items-center gap-space-md">
+        <div className="items-center gap-space-md flex">
           <button
             aria-label="Notifications"
-            className="relative p-space-sm rounded-xl text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-all"
+            className="relative p-space-sm rounded-xl hidden lg:block text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-all"
             type="button"
           >
             <IoIosNotificationsOutline className="material-symbols-outlined text-[22px]" />
@@ -62,7 +60,7 @@ const NavBar = () => {
           </button>
           <a
             aria-label="Watchlist"
-            className="relative p-space-sm rounded-xl text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-all"
+            className="relative p-space-sm rounded-xl hidden lg:block text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-all"
             data-path="watchlist"
             href="#"
           >
@@ -81,7 +79,7 @@ const NavBar = () => {
               dark_mode
             </span>
           </button> */}
-          <div className="flex items-center pl-space-xs">
+          <div className="items-center pl-space-xs hidden lg:flex">
             <div className="p-0.5 rounded-full ring-2 ring-primary-container/70 shadow-[0_0_14px_rgba(56,189,248,0.3)]">
               <img
                 alt="Profile"
@@ -90,6 +88,14 @@ const NavBar = () => {
               />
             </div>
           </div>
+
+          <button
+            aria-label="Menu"
+            className="p-space-sm rounded-xl block lg:hidden text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-all"
+            type="button"
+          >
+            <IoMdReorder className="material-symbols-outlined text-2xl" />
+          </button>
         </div>
       </div>
     </header>

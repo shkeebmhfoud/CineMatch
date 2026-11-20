@@ -13,7 +13,7 @@ export const routes = [
   },
   {
     name: "Watchlist",
-    path: "/watchlist",
+    path: "/watch-list",
   },
   {
     name: "Community",
